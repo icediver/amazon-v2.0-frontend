@@ -3,10 +3,10 @@ import { IReview } from '@/types/review.interface'
 
 import { instance } from '@/api/api.interceptor'
 
-import { PRODUCTS, TypeDataFilters } from './product.types'
+import { PRODUCTS, TypeProductDataFilters } from './product.types'
 
 export const ProductsService = {
-	async getAll(queryData = {} as TypeDataFilters) {
+	async getAll(queryData = {} as TypeProductDataFilters) {
 		return instance<IProduct[]>({
 			url: PRODUCTS,
 			method: 'GET',
