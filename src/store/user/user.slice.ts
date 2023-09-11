@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { getStoreLocal } from '@/utils/local-storage'
+
 import { checkAuth, login, logout, register } from './user.actions'
 import { IInitialState } from './user.interface'
 
 const initialState: IInitialState = {
-	user: localStorage.getItem('user')
-		? JSON.parse(localStorage.getItem('user') as string)
-		: null,
+	user: getStoreLocal('user'),
 	isLoading: false
 }
 
@@ -19,9 +19,9 @@ export const userSlice = createSlice({
 			.addCase(register.pending, state => {
 				state.isLoading = true
 			})
-			.addCase(register.fulfilled, (state, action) => {
+			.addCase(register.fulfilled, (state, { payload }) => {
 				state.isLoading = false
-				state.user = action.payload.user
+				state.user = payload.user
 			})
 			.addCase(register.rejected, state => {
 				state.isLoading = false
@@ -34,7 +34,8 @@ export const userSlice = createSlice({
 				state.isLoading = false
 				state.user = payload.user
 			})
-			.addCase(login.rejected, state => {
+			.addCase(login.rejected, (state, { payload }) => {
+				console.log(payload)
 				state.isLoading = false
 				state.user = null
 			})

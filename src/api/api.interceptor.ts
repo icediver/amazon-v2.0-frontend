@@ -9,18 +9,19 @@ export const instance = axios.create({
 	headers: getContentType()
 })
 
-instance.interceptors.request.use(async config => {
+instance.interceptors.request.use(config => {
 	const accessToken = getAccessToken()
 
-	if (config && config.headers && accessToken) {
+	if (config.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
 	}
-
 	return config
 })
 
 instance.interceptors.response.use(
-	config => config,
+	config => {
+		return config
+	},
 	async error => {
 		const originalRequest = error.config
 
