@@ -5,7 +5,12 @@ const nextConfig = {
 		APP_URL: process.env.APP_URL
 	},
 	images: {
-		domains: ['loremflickr.com', 'www.aptronixindia.com', 'cdn1.ozone.ru']
+		domains: [
+			'loremflickr.com',
+			'www.aptronixindia.com',
+			'cdn1.ozone.ru',
+			'localhost'
+		]
 	}
 }
 
