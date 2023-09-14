@@ -1,6 +1,6 @@
 import { ICategory } from '@/types/category.interface'
 
-import { instance } from '@/api/api.interceptor'
+import { axiosClassic, instance } from '@/api/api.interceptor'
 
 import { TypeProductData } from './product/product.types'
 
@@ -8,7 +8,7 @@ const CATEGORIES = 'categories'
 
 export const CategoryService = {
 	async getAll() {
-		return instance<ICategory[]>({
+		return axiosClassic<ICategory[]>({
 			url: CATEGORIES,
 			method: 'GET'
 		})
@@ -21,7 +21,7 @@ export const CategoryService = {
 		})
 	},
 	async getBySlug(slug: string) {
-		return instance<ICategory>({
+		return axiosClassic<ICategory>({
 			url: `${CATEGORIES}/by-slug/${slug}`,
 			method: 'GET'
 		})

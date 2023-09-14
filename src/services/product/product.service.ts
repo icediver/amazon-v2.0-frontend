@@ -1,40 +1,46 @@
-import { IProduct } from '@/types/product.interface'
-import { IReview } from '@/types/review.interface'
+import { IProduct, TypePaginationProducts } from '@/types/product.interface'
 
-import { instance } from '@/api/api.interceptor'
+import { axiosClassic, instance } from '@/api/api.interceptor'
 
-import { PRODUCTS, TypeProductDataFilters } from './product.types'
+import {
+	PRODUCTS,
+	TypeProductData,
+	TypeProductDataFilters
+} from './product.types'
 
-export const ProductsService = {
+export const ProductService = {
 	async getAll(queryData = {} as TypeProductDataFilters) {
-		return instance<IProduct[]>({
+		const { data } = await axiosClassic<TypePaginationProducts>({
 			url: PRODUCTS,
 			method: 'GET',
 			params: queryData
 		})
+
+		return data
 	},
 
-	async getSimilar(productId: string | number) {
-		return instance<IProduct[]>({
-			url: `${PRODUCTS}/similar/${productId}`,
+	async getSimilar(id: string | number) {
+		return axiosClassic<IProduct[]>({
+			url: `${PRODUCTS}/similar/${id}`,
 			method: 'GET'
 		})
 	},
 
 	async getBySlug(slug: string) {
-		return instance<IProduct>({
+		return axiosClassic<IProduct>({
 			url: `${PRODUCTS}/by-slug/${slug}`,
 			method: 'GET'
 		})
 	},
 
-	async getByProduct(categorySlug: string) {
-		return instance<IProduct[]>({
+	async getByCategory(categorySlug: string) {
+		return axiosClassic<IProduct[]>({
 			url: `${PRODUCTS}/by-category/${categorySlug}`,
 			method: 'GET'
 		})
 	},
-	async getById(id: string | string) {
+
+	async getById(id: string | number) {
 		return instance<IProduct>({
 			url: `${PRODUCTS}/${id}`,
 			method: 'GET'
@@ -48,16 +54,17 @@ export const ProductsService = {
 		})
 	},
 
-	async update(id: string | number, name: string) {
+	async update(id: string | number, data: TypeProductData) {
 		return instance<IProduct>({
-			url: `/${PRODUCTS}/${id}`,
+			url: `${PRODUCTS}/${id}`,
 			method: 'PUT',
-			data: { name }
+			data
 		})
 	},
+
 	async delete(id: string | number) {
 		return instance<IProduct>({
-			url: `/${PRODUCTS}/${id}`,
+			url: `${PRODUCTS}/${id}`,
 			method: 'DELETE'
 		})
 	}
