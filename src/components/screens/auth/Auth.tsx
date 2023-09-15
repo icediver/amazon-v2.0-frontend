@@ -12,7 +12,6 @@ import { IEmailPassword } from '@/store/user/user.interface'
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 
-import styles from './Auth.module.scss'
 import { useAuthRedirect } from './useAuthRedirect'
 import { validEmail } from './valid-email'
 
@@ -44,7 +43,7 @@ const Auth: FC = () => {
 					onSubmit={handleSubmit(onSubmit)}
 					className='rounded-lg bg-white shadow-sm p-8 m-auto'
 				>
-					<Heading className='capitalize text-center mb-4' children={type} />
+					<Heading className='capitalize text-center mb-4'>{type}</Heading>
 					{isLoading ? <Loader /> : <></>}
 					<Field
 						{...formRegister('email', {
@@ -70,7 +69,7 @@ const Auth: FC = () => {
 						error={errors.password?.message}
 					/>
 
-					<Button variant='orange'>Let's go!</Button>
+					<Button variant='orange'>{"Let's go!"}</Button>
 					<div>
 						<button
 							type='button'
