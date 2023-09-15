@@ -8,6 +8,7 @@ import { useProfile } from '@/hooks/useProfile'
 
 const FavoritesPage: NextPageAuth = () => {
 	const { profile } = useProfile()
+	console.log(profile)
 	return (
 		<Meta title='Favorites'>
 			<Layout>

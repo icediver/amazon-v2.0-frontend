@@ -1,4 +1,5 @@
-import { FiMinus, FiTrash } from 'react-icons/fi'
+import { FC } from 'react'
+import { FiMinus, FiPlus, FiTrash } from 'react-icons/fi'
 
 import { useActions } from '@/hooks/useActions'
 import { useCart } from '@/hooks/useCart'
@@ -24,6 +25,9 @@ const CartActions: FC<{ item: ICartItem }> = ({ item }) => {
 					value={quantity}
 					className='w-10 bg-black text-center'
 				/>
+				<button onClick={() => changeQuantity({ id: item.id, type: 'plus' })}>
+					<FiPlus fontSize={13} />
+				</button>
 				<button
 					onClick={() => removeFromCart({ id: item.id })}
 					className='ml-3 text-dark-primary'

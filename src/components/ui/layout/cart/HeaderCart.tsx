@@ -19,7 +19,7 @@ const HeaderCart: FC = () => {
 	const { items, total } = useCart()
 	const { push } = useRouter()
 	return (
-		<div className='relative'>
+		<div className='relative' ref={ref}>
 			<SquareButton
 				Icon={RiShoppingCartLine}
 				onClick={() => {
@@ -30,7 +30,7 @@ const HeaderCart: FC = () => {
 
 			<div
 				className={clsx(
-					'absolute top-[4.2rem] w-80 -left-[12.5rem] bg-secondary rounded-xl px-5 py-3 text-sm menu z-20 text-white',
+					'absolute top-[4.2rem] w-80 -left-[12.5rem] bg-secondary rounded-xl px-5 py-3 text-sm menu z-20 text-white transition-all duration-500',
 					isShow ? 'open-menu' : 'close-menu'
 				)}
 			>

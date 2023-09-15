@@ -9,7 +9,8 @@ const nextConfig = {
 			'loremflickr.com',
 			'www.aptronixindia.com',
 			'cdn1.ozone.ru',
-			'localhost'
+			'localhost',
+			'avatars.githubusercontent.com'
 		]
 	}
 }

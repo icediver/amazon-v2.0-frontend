@@ -17,6 +17,7 @@ const DynamicFavoriteButton = dynamic(
 )
 
 const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
+	console.log(product)
 	return (
 		<div className='animate-scaleIn'>
 			<div className='bg-white rounded-xl relative overflow-hidden'>

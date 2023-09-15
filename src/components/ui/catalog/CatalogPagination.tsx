@@ -32,6 +32,7 @@ const CatalogPagination: FC<ICatalogPagination> = ({ data, title }) => {
 	})
 
 	if (isLoading) return <Loader />
+	console.log('CatalogPagination')
 	return (
 		<section>
 			{title && <Heading className='mb-5'>{title}</Heading>}

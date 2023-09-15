@@ -5,6 +5,9 @@ import { AiOutlineHeart } from 'react-icons/ai'
 
 import HeaderCart from '../cart/HeaderCart'
 
+import HeaderProfile from './header-profile/HeaderProfile'
+import Search from './search/Search'
+
 const Header: FC = () => {
 	return (
 		<header
@@ -20,13 +23,13 @@ const Header: FC = () => {
 					alt='Amazon v2'
 				/>
 			</Link>
-			{/*<Search />*/}
+			<Search />
 			<div className='flex items-center justify-end gap-10'>
 				<Link href={'/favorites'} className='text-white'>
 					<AiOutlineHeart size={28} />
 				</Link>
 				<HeaderCart />
-				{/*<HeaderProfile />*/}
+				<HeaderProfile />
 			</div>
 		</header>
 	)
