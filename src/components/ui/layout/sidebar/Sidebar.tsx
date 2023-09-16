@@ -22,7 +22,7 @@ const Sidebar: FC = () => {
 	const { user } = useAuth()
 	const { logout } = useActions()
 	return (
-		<aside className='h-screen bg-secondary flex flex-col justify-between h-[calc(100vh-91px)]'>
+		<aside className='bg-secondary flex flex-col justify-between h-[calc(100vh_-_91px)]'>
 			<div>
 				{isLoading ? (
 					<Loader />

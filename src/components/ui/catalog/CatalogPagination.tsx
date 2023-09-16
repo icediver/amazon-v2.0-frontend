@@ -10,10 +10,7 @@ import Loader from '../loader/Loader'
 import ProductItem from './product-item/ProductItem'
 import SortDropdown from './sort-dropdown/SortDropdown'
 import { ProductService } from '@/services/product/product.service'
-import {
-	EnumProductSort,
-	TypeProductData
-} from '@/services/product/product.types'
+import { EnumProductSort } from '@/services/product/product.types'
 
 interface ICatalogPagination {
 	data: TypePaginationProducts

@@ -8,7 +8,6 @@ import { IProduct } from '@/types/product.interface'
 import { convertPrice } from '@/utils/convertPrice'
 
 import AddToCartButton from './add-to-cart-button/AddToCartButton'
-import FavoriteButton from './favorite-button/FavoriteButton'
 import ProductRating from './product-rating/ProductRating'
 
 const DynamicFavoriteButton = dynamic(
@@ -17,7 +16,6 @@ const DynamicFavoriteButton = dynamic(
 )
 
 const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
-	console.log(product)
 	return (
 		<div className='animate-scaleIn'>
 			<div className='bg-white rounded-xl relative overflow-hidden'>
