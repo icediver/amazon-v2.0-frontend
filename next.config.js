@@ -10,7 +10,8 @@ const nextConfig = {
 			'www.aptronixindia.com',
 			'cdn1.ozone.ru',
 			'localhost',
-			'avatars.githubusercontent.com'
+			'avatars.githubusercontent.com',
+			'cloudflare-ipfs.com'
 		]
 	}
 }
