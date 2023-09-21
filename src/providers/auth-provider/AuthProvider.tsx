@@ -1,36 +1,53 @@
 import Cookies from 'js-cookie'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import { usePathname, useRouter } from 'next/navigation'
 import { FC, PropsWithChildren, useEffect } from 'react'
+
+import { ADMIN_PANEL_URL } from '@/config/url.config'
 
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 
-import { TypeComponentAuthFields } from './auth-page.type'
+import Auth from '../../../app/auth/Auth'
+import NotFound from '../../../app/not-found'
+
+import { protectedRoutes } from './protected-routes.data'
+import { REFRESH_TOKEN } from '@/constants/token.constant'
 import { getAccessToken } from '@/services/auth/auth.helper'
 
-const DynamicCheckRole = dynamic(() => import('./CheckRole'), { ssr: false })
-
-const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
-	Component: { isOnlyUser },
-	children
-}) => {
+const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 	const { user } = useAuth()
 	const { checkAuth, logout } = useActions()
 
-	const { pathname } = useRouter()
+	const pathname = usePathname()
+
 	useEffect(() => {
 		const accessToken = getAccessToken()
 		if (accessToken) checkAuth()
 	}, [])
+
 	useEffect(() => {
-		const refreshToken = Cookies.get('refreshToken')
+		const refreshToken = Cookies.get(REFRESH_TOKEN)
 		if (!refreshToken && user) logout()
 	}, [pathname])
-	return isOnlyUser ? (
-		<DynamicCheckRole Component={{ isOnlyUser }}>{children}</DynamicCheckRole>
-	) : (
-		<>{children}</>
+
+	const router = useRouter()
+
+	const isProtectedRoute = protectedRoutes.some(route =>
+		pathname?.startsWith(route)
 	)
+
+	const isAdminRoute = pathname?.startsWith(ADMIN_PANEL_URL)
+
+	if (!isProtectedRoute && !isAdminRoute) return <>{children}</>
+
+	if (user?.isAdmin) return <>{children}</>
+	if (user && isProtectedRoute) return <>{children}</>
+
+	if (user && isAdminRoute) return <NotFound />
+
+	if (pathname !== '/auth') return <Auth />
+
+	return null
 }
+
 export default AuthProvider

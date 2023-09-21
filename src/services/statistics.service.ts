@@ -1,6 +1,6 @@
 import { instance } from '@/api/api.interceptor'
 
-const STATISTICS = 'orders'
+const STATISTICS = 'statistics'
 
 export type TypeStatisticsResponse = {
 	name: string

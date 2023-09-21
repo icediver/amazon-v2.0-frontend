@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { FC, useState } from 'react'
 
-import { IProduct, TypePaginationProducts } from '@/types/product.interface'
+import { TypePaginationProducts } from '@/types/product.interface'
 
 import Button from '../button/Button'
 import Heading from '../heading/Heading'
@@ -24,12 +24,12 @@ const CatalogPagination: FC<ICatalogPagination> = ({ data, title }) => {
 	const [page, setPage] = useState<number>(1)
 	const { data: response, isLoading } = useQuery({
 		queryKey: ['products', sortType, page],
-		queryFn: () => ProductService.getAll({ page, perPage: 4, sort: sortType }),
+		queryFn: () =>
+			ProductService.getAll({ page, perPage: 4, sort: sortType, ratings: '4' }),
 		initialData: data
 	})
 
 	if (isLoading) return <Loader />
-	console.log('CatalogPagination')
 	return (
 		<section>
 			{title && <Heading className='mb-5'>{title}</Heading>}

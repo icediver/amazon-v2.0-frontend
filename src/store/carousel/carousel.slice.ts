@@ -13,6 +13,7 @@ export const carouselSlice = createSlice({
 		nextSlide: (state, action: PayloadAction<{ carouselLength: number }>) => {
 			if (state.selectedItemIndex !== action.payload.carouselLength - 1)
 				state.selectedItemIndex += 1
+			else state.selectedItemIndex = 0
 		},
 		prevSlide: state => {
 			if (state.selectedItemIndex > 0) state.selectedItemIndex -= 1

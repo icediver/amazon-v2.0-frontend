@@ -1,13 +1,13 @@
-import { IUser } from "@/types/user.interface"
+import { IUser } from '@/types/user.interface'
 
 export interface IUserState {
     email: string
+    isAdmin: boolean
 }
 
 export interface ITokens {
     accessToken: string
     refreshToken: string
-    
 }
 
 export interface IInitialState {
@@ -21,6 +21,5 @@ export interface IEmailPassword {
 }
 
 export interface IAuthResponse extends ITokens {
-    user: IUser & {
-    }
+    user: IUser & {}
 }

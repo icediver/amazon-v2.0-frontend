@@ -13,6 +13,14 @@ const nextConfig = {
 			'avatars.githubusercontent.com',
 			'cloudflare-ipfs.com'
 		]
+	},
+	async rewrites() {
+		return [
+			{
+				source: '/uploads/:path*',
+				destination: 'http://localhost:4200/uploads/:path*'
+			}
+		]
 	}
 }
 

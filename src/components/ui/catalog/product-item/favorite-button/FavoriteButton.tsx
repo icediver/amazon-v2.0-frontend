@@ -1,3 +1,5 @@
+'use client'
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { FC } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'

@@ -1,27 +1,19 @@
+'use client'
+
 import React, { FC } from 'react'
 
-import CatalogPagination from '@/ui/catalog/CatalogPagination'
-import Layout from '@/ui/layout/Layout'
-import Meta from '@/ui/meta/Meta'
+import Carousel from '@/ui/carousel/Carousel'
+import { carouselItems } from '@/ui/carousel/carousel.data'
+import Catalog from '@/ui/catalog/Catalog'
 
-import { useActions } from '@/hooks/useActions'
-import { useAuth } from '@/hooks/useAuth'
+import { TypePaginationProducts } from '@/types/product.interface'
 
-import { TypePaginationProducts, TypeProducts } from '@/types/product.interface'
-
-const Home: FC<TypePaginationProducts> = ({ products, length }) => {
-	const { user } = useAuth()
-	const { logout } = useActions()
+const Home: FC<TypePaginationProducts> = ({ products }) => {
 	return (
-		<Meta title='Home'>
-			<Layout>
-				{!!user && <button onClick={() => logout()}>Logout</button>}
-				<CatalogPagination
-					title='Freshed products'
-					data={{ products, length }}
-				/>
-			</Layout>
-		</Meta>
+		<>
+			<Carousel items={carouselItems} className='mb-10' />
+			<Catalog title='Freshed products' products={products} />
+		</>
 	)
 }
 

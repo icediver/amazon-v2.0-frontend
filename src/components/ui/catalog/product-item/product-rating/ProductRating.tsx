@@ -1,18 +1,23 @@
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 import { FC, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 
 import { IProduct } from '@/types/product.interface'
 
-import { ReviewService } from '@/services/review.service'
+interface IProductRating {
+	product: IProduct
+	isText?: boolean
+}
 
-const ProductRating: FC<{ product: IProduct }> = ({ product }) => {
+const ProductRating: FC<IProductRating> = ({ product, isText = false }) => {
 	// const { data: rating } = useQuery({
 	// 	queryKey: ['get product rating', product.id],
 	// 	queryFn: () => ReviewService.getAverageByProduct(product.id),
 	// 	select: ({ data }) => data.rating
 	// })
-	const [rating, setRating] = useState<number>(
+	const [rating] = useState<number>(
 		Math.round(
 			product.reviews.reduce((acc, review) => acc + review.rating, 0) /
 				product.reviews.length
@@ -40,7 +45,9 @@ const ProductRating: FC<{ product: IProduct }> = ({ product }) => {
 					</span>
 				</span>
 			)}
-			<span className='text-xs'>({product.reviews.length} reviews)</span>
+			{isText && (
+				<span className='text-xs'>({product.reviews.length} reviews)</span>
+			)}
 		</div>
 	)
 }
